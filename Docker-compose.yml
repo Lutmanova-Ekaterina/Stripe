@@ -1,0 +1,23 @@
+version: '3.11'
+
+services:
+  db:
+    image: postgresql
+    environment:
+      POSTGRES_PASSWORD: '2638543'
+      POSTGRES_DB: 'db'
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready -U postgres' ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+
+volumes:
+  db:
+    driver: local
+
